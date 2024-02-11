@@ -1,5 +1,6 @@
 import { Field, Formik, useFormik } from "formik"
 import { useNavigate } from "react-router-dom";
+import { TextInput, Button, Label, Checkbox, Card, Spinner } from "flowbite-react"
 import { UserSchema } from "../schema/user.schema"
 import { useDispatch, useSelector } from "react-redux"
 import { loginUser } from "../redux/api/user";
@@ -17,55 +18,57 @@ export default () => {
             username: "",
             password: ""
         },
-        validationSchema:UserSchema,
+        validationSchema: UserSchema,
         onSubmit: (values) => {
-            const {username,password} = values;
+            const { username, password } = values;
             dispatch(setLoading(true));
-            dispatch(loginUser({username,password,navigate}));
+            dispatch(loginUser({ username, password, navigate }));
         }
     })
 
 
     return (
-        
-        <div className="flex justify-center align-middle h-screen">
-            <div className="card w-96 bg-base-100 shadow-xl m-auto">
-                <div className="card-body">
-                <h2 className="card-title text-lg">Sign In</h2>
-                    <div className="">
-                        <form  onSubmit={form.handleSubmit}>
-                            <label className="form-control w-full max-w-xs">
-                                <div className="label">
-                                    <span className="label-text">Username or Email</span>
-                                </div>
-                                <input type="text" name="username" onChange={form.handleChange} value={form.values.username}  placeholder="johndoe@email.com" className="input input-bordered w-full max-w-xs" />
-                                <div className="label">
-                                    <span className="label-text-alt text-red-500">{form.errors.username}</span>
-                                </div>
-                            </label>
-                            <label className="form-control w-full max-w-xs">
-                                <div className="label">
-                                    <span className="label-text">Password</span>
-                                </div>
-                                <input type="password" name="password" onChange={form.handleChange} value={form.values.password} placeholder="Password" className="input input-bordered w-full max-w-xs" />
-                                <div className="label">
-                                    <span className="label-text-alt text-red-500">{form.errors.password}</span>
-                                </div>
-                            </label>
-                            <div className="flex justify-center">
-                                <button className="btn btn-block" disabled={loading?"disabled":""}  type="submit">
-                                    {
-                                        loading && <span className="loading loading-spinner"></span>
-                                    }
-                                    Sign In
-                                </button>
-                            </div>
 
-                        </form>
+        <div className="flex justify-center align-middle h-screen">
+            <Card className="w-5/6 md:w-1/2 lg:w-1/4 m-auto">
+                <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Sign In</h5>
+                <form onSubmit={form.handleSubmit} className="flex max-w-md flex-col gap-4">
+                    <div>
+                        <div className="mb-2 block">
+                            <Label htmlFor="email1" value="Email or Username" />
+                        </div>
+                        <TextInput onChange={form.handleChange} id="email1" name="username" type="text" placeholder="name@flowbite.com" helperText={
+                            <>
+                                {
+                                    form.errors.username && form.touched.username &&
+                                    <span className="text-red-500">{form.errors.username}</span>
+                                }
+                            </>
+                        } />
 
                     </div>
-                </div>
-            </div>
+                    <div>
+                        <div className="mb-2 block">
+                            <Label htmlFor="password1" value="Password" />
+                        </div>
+                        <TextInput id="password1" name="password" onChange={form.handleChange} type="password" helperText={
+                            <>
+                                {
+                                    form.errors.password && form.touched.password &&
+                                    <span className="text-red-500">{form.errors.password}</span>
+                                }
+                            </>
+                        } />
+                    </div>
+                    <div className="flex items-center gap-2">
+                        <Checkbox id="remember" />
+                        <Label htmlFor="remember">Remember me</Label>
+                    </div>
+                    <Button type="submit" >
+                        {loading && <Spinner className="mr-3" aria-label="spinner example" />}
+                        Sign In</Button>
+                </form>
+            </Card>
 
         </div>
     )
