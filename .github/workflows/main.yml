@@ -3,7 +3,7 @@ name: s3-depl
 # Controls when the workflow will run
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
 jobs:
   # This workflow contains a single job called "build"
   build:
