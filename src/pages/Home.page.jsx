@@ -1,6 +1,6 @@
 import { Flowbite, Navbar, Sidebar } from 'flowbite-react';
 import { HiArrowSmRight, HiChartPie, HiInbox, HiShoppingBag, HiTable, HiUser, HiViewBoards } from 'react-icons/hi';
-
+import Logo from "../assets/logo.png";
 const theme = {
    sidebar:{
     root:{
@@ -15,7 +15,7 @@ export default ()=>{
     <>
     <Navbar className='fixed' fluid rounded>
       <Navbar.Brand  href="https://flowbite-react.com">
-        <img src="https://www.flowbite-react.com/favicon.svg" className="mr-3 h-6 sm:h-9" alt="Flowbite React Logo" />
+        <img src={Logo} className=" h-10 sm:h-14 sm:w-14" alt="Flowbite React Logo" />
         <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">Alphabet Student</span>
       </Navbar.Brand>
       {/* <Navbar.Toggle />
